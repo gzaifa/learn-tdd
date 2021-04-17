@@ -34,7 +34,7 @@ public class CarControllerTest {
 	
 	
 	@Test
-	private void getCar_ReturnsCarDetails() throws Exception {
+	public void getCar_ReturnsCarDetails() throws Exception {
 		
 		given(carService.getCarDetails(anyString())).willReturn(new Car("prius", "hybrid"));
 		
