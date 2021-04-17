@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.sg.gzf.learn.tdd.controller.CarController;
 import com.sg.gzf.learn.tdd.dto.Car;
+import com.sg.gzf.learn.tdd.exception.CarNotFoundException;
 import com.sg.gzf.learn.tdd.service.CarService;
 
 /**
@@ -41,8 +42,15 @@ public class CarControllerTest {
 		mockMvc.perform(MockMvcRequestBuilders.get("/cars/prius"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("name").value("prius"))
-				.andExpect(jsonPath("type").value("prius"));
+				.andExpect(jsonPath("type").value("hybrid"));
 		
 	}
 	
+	@Test
+	public void getCar_NotFound() throws Exception {
+		given(carService.getCarDetails(anyString())).willThrow(new CarNotFoundException());
+		
+		mockMvc.perform(MockMvcRequestBuilders.get("/cars/toyota"))
+			.andExpect(status().isNotFound());
+	}	
 }
