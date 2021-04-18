@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.sg.gzf.learn.tdd.controller.CarController;
 import com.sg.gzf.learn.tdd.dto.Car;
-import com.sg.gzf.learn.tdd.exception.CarNotFoundException;
+import com.sg.gzf.learn.tdd.exceptions.CarNotFoundException;
 import com.sg.gzf.learn.tdd.service.CarService;
 
 /**
