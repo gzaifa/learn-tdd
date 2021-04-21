@@ -22,6 +22,8 @@ import com.sg.gzf.learn.tdd.service.CarService;
 @AutoConfigureTestDatabase
 @AutoConfigureCache
 public class CachingTest {
+	private static final String PRIUS = "prius";
+
 	@Autowired
 	private CarService carService;
 	
@@ -30,12 +32,12 @@ public class CachingTest {
 	
 	@Test
 	public void getCar_ReturnsCachedCarSecondTime() throws Exception {
-		given(carRepository.findByName(anyString())).willReturn(new Car("prius", "hybrid"));
+		given(carRepository.findByName(anyString())).willReturn(new Car(PRIUS, "hybrid"));
 		
-		carService.getCarDetails("prius");
-		carService.getCarDetails("prius");
+		carService.getCarDetails(PRIUS);
+		carService.getCarDetails(PRIUS);
 		
-		verify(carRepository, times(1)).findByName("prius");
+		verify(carRepository, times(1)).findByName(PRIUS);
 	}
 	
 }
