@@ -25,14 +25,14 @@ class IntegrationTest {
 		
 		
 		//act
-		ResponseEntity<Car> response = restTemplate.getForEntity("/cars/prius", Car.class);
+		ResponseEntity<Car> response = restTemplate.getForEntity("/cars/accord", Car.class);
 		
 		//assert
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getStatusCode().is2xxSuccessful());
 		
-		assertThat(response.getBody().getName()).isEqualTo("prius");
-		assertThat(response.getBody().getType()).isEqualTo("hybrid");
+		assertThat(response.getBody().getName()).isEqualTo("accord");
+		assertThat(response.getBody().getType()).isEqualTo("4wd");
 	
 		
 	}

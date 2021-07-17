@@ -1,8 +1,10 @@
 package com.sg.gzf.learn.tdd;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestReporter;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -11,8 +13,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.sg.gzf.learn.tdd.dto.Car;
 
+
+@RunWith(SpringRunner.class)
 @DataJpaTest
-public class CarRepositoryTest {
+class CarRepoTest {
+	
 	@Autowired
 	private CarRepository carRepository;
 	
@@ -20,7 +25,7 @@ public class CarRepositoryTest {
 	private TestEntityManager entityManager;
 	
 	@Test
-	void findCar_ReturnCarDetails() throws Exception {
+	void findCar_ReturnsCarDetails() throws Exception {
 		Car savedCar = entityManager.persistFlushFind(new Car("Accord", "petrol"));
 		
 		assertThat(savedCar.getId())
@@ -29,7 +34,6 @@ public class CarRepositoryTest {
 		
 		Car retrievedCar = carRepository.findByName("Accord");
 		
-		assertThat(retrievedCar).isEqualTo(savedCar);
+		assertThat(savedCar).isEqualTo(retrievedCar);
 	}
-	
 }
